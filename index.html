@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindcare Dashboard</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script> 
+    
+    <style>
+        /* Custom CSS variables and styles for Mindcare */
+        :root {
+            /* Deeper purple for the header */
+            --mindcare-purple-header: #6B46C1; 
+            /* Very light off-white/beige background tone for subtle contrast */
+            --mindcare-background-tone: #F7F7F7; 
+        }
+
+        /* Apply custom background tone to the body */
+        body {
+            background-color: var(--mindcare-background-tone);
+        }
+
+        /* Apply custom Tailwind utility classes */
+        .bg-mindcare-purple {
+            background-color: var(--mindcare-purple-header);
+        }
+        .ai-companion-gradient {
+            /* Adjusted gradient for exact visual match */
+            background: linear-gradient(90deg, #BDEFFF 0%, #D8BFD8 100%);
+        }
+        /* Custom classes for tags */
+        .calm-tag {
+            font-size: 0.75rem; 
+            padding: 0.1rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            line-height: 1;
+            text-transform: uppercase;
+            background-color: #E6FFFA; 
+            color: #38B2AC; 
+        }
+        .productive-tag {
+            font-size: 0.75rem; 
+            padding: 0.1rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            line-height: 1;
+            text-transform: uppercase;
+            background-color: #E9D8FD; 
+            color: #805AD5; 
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+
+    <header class="bg-mindcare-purple shadow-md sticky top-0 z-10">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-xl font-bold text-white flex items-center">
+                        <span class="mr-2">🧠</span> Mindcare
+                    </h1>
+                </div>
+                
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-4 items-center">
+                    <a href="#" class="main-nav-link text-purple-200 hover:text-white px-3 py-2 text-sm font-medium transition duration-150" data-target="dashboard">Dashboard</a>
+                    <a href="#" class="main-nav-link border-b-2 border-white text-white px-3 py-2 text-sm font-medium transition duration-150" data-target="journal" aria-current="page">Journal</a>
+                    <a href="#" class="main-nav-link text-purple-200 hover:text-white px-3 py-2 text-sm font-medium transition duration-150" data-target="chat">Chat</a>
+                    <a href="#" class="main-nav-link text-purple-200 hover:text-white px-3 py-2 text-sm font-medium transition duration-150" data-target="progress">Progress</a>
+                    <a href="#" class="main-nav-link text-purple-200 hover:text-white px-3 py-2 text-sm font-medium transition duration-150" data-target="resources">Resources</a>
+                    
+                    <div class="ml-6 flex items-center bg-purple-600 rounded-md border border-purple-400 focus-within:border-white focus-within:ring-1 focus-within:ring-white transition duration-150">
+                        <span class="text-white pl-2">🔍</span>
+                        <input type="text" placeholder="Search" class="p-1 text-sm outline-none bg-transparent text-white placeholder-purple-300 w-32">
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2 text-white">
+                    <button id="settings-btn" class="hover:opacity-80 transition text-lg">⚙</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div id="journal-content" class="main-content-section">
+             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md space-y-4 transform hover:scale-[1.005] transition duration-300">
+                        <h2 class="text-sm font-semibold text-gray-800 pb-2 border-b border-gray-100">Start Journaling</h2>
+                        <p class="text-sm text-gray-500">How you feeling today? Let's reflect...</p>
+                        <div id="mood-picker" class="flex space-x-3 items-center pt-2">
+                            <span class="mood-icon text-3xl cursor-pointer opacity-50 hover:opacity-100 transition duration-150" data-mood="sad">😔</span>
+                            <span class="mood-icon text-3xl cursor-pointer opacity-50 hover:opacity-100 transition duration-150" data-mood="neutral">😐</span>
+                            <span class="mood-icon text-3xl cursor-pointer opacity-50 hover:opacity-100 transition duration-150" data-mood="calm">🙂</span>
+                            <span class="mood-icon text-3xl cursor-pointer ring-2 ring-blue-500 rounded-full p-1 -m-1 transition duration-150" data-mood="happy">😊</span> 
+                            <span class="mood-icon text-3xl cursor-pointer opacity-50 hover:opacity-100 transition duration-150" data-mood="excited">😃</span>
+                            <button class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-medium ml-4 hover:bg-blue-600 transition">+</button>
+                        </div>
+                    </div>
+
+                    <div class="ai-companion-gradient p-6 rounded-xl shadow-md space-y-3 text-center transform hover:scale-[1.01] transition duration-300">
+                        <div class="flex justify-center items-center space-x-2">
+                            <span class="text-2xl">🤖</span>
+                            <h3 class="text-lg font-semibold text-purple-800">Your AI Companion</h3>
+                        </div>
+                        <p class="text-purple-700 text-sm">Hi there! 👋 Ready to check in with yourself today?</p>
+                        <div class="flex justify-center pt-2">
+                            <button id="guided-activities" class="bg-white text-purple-600 text-sm font-medium py-1 px-4 rounded-full shadow-md hover:shadow-lg hover:scale-[1.02] transition duration-200">Guided wellness activities</button>
+                        </div>
+                        <div class="flex justify-center space-x-4 pt-2">
+                            <button id="mood-check-btn" class="bg-white text-purple-600 text-xs font-medium py-1 px-3 rounded-full shadow-sm hover:bg-purple-50 transition duration-150">Mood Check</button>
+                            <button id="coping-tips-btn" class="bg-white text-purple-600 text-xs font-medium py-1 px-3 rounded-full shadow-sm hover:bg-purple-50 transition duration-150">Coping Tips</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 pb-2">Journal Entries</h3>
+                        <div id="journal-entries-container">
+                            </div>
+                    </div>
+                </div>
+
+                <aside class="lg:col-span-1 space-y-6">
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
+                        <h3 class="text-sm font-semibold text-gray-800">Progress Snapshot</h3>
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>Maintained</span>
+                            <span>Rest</span>
+                        </div>
+                        <div class="text-center border-b border-gray-100 pb-4">
+                            <p class="text-4xl font-bold text-blue-600" id="progress-percentage">24%</p>
+                            <p class="text-xs text-gray-500">Previous analytics</p>
+                            <p class="text-sm text-green-500 mt-1 font-medium" id="progress-message">You're doing great! Keep reflecting.</p>
+                        </div>
+                        <div class="h-20 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-xs font-semibold">
+                            <span class="text-6xl text-gray-300">W/N</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Resources</h3>
+                        <div id="resources-container" class="space-y-3">
+                            </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        
+        <div id="dashboard-content" class="main-content-section hidden lg:grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-3 p-6 bg-white rounded-xl shadow-md min-h-[500px]">
+                <h2 class="text-2xl font-semibold text-gray-700">Main Dashboard Overview</h2>
+                <p class="text-gray-500">This section shows a full-width dashboard overview.</p>
+            </div>
+        </div>
+
+        <div id="chat-content" class="main-content-section hidden lg:grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-3 p-6 bg-white rounded-xl shadow-md min-h-[500px] transform hover:scale-[1.005] transition duration-300">
+                <h2 class="text-2xl font-semibold text-gray-700">Your AI Companion Chat</h2>
+                <p class="text-gray-500">This section is the full-width chat interface, dedicated to the AI companion.</p>
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg h-64 border border-gray-200">
+                    <p class="text-gray-400">Placeholder for Chat UI...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="progress-content" class="main-content-section hidden">
+             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md min-h-[250px]">
+                        <h2 class="text-2xl font-semibold text-gray-700">Detailed Progress Analytics</h2>
+                        <p class="text-gray-500">This area would contain charts and detailed metrics.</p>
+                    </div>
+                </div>
+                <aside class="lg:col-span-1 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md space-y-4">
+                        <h3 class="text-sm font-semibold text-gray-800">Progress Snapshot</h3>
+                        <div class="text-center border-b border-gray-100 pb-4">
+                            <p class="text-4xl font-bold text-blue-600">24%</p>
+                            <p class="text-xs text-gray-500">Previous analytics</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        
+        <div id="resources-content" class="main-content-section hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md min-h-[250px]">
+                        <h2 class="text-2xl font-semibold text-gray-700">Full Resources Library</h2>
+                       
+                    </div>
+                </div>
+                <aside class="lg:col-span-1 space-y-6">
+                     <div class="space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Quick Resources</h3>
+                        <div id="resources-container-expanded" class="space-y-3">
+                            </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+    </main>
+    
+    <script src="app.js"></script>
+
+</body>
+</html>
